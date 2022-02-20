@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.dao.AdminDAO">
+
+<insert id="create">insert into product values (#{productnum},#{productname} ,#{productkind}
+,#{productprice},#{productcontent},#{productimage},#{productsales})</insert>
+
+<insert id="register">
+insert into product(productnum,productname,productkind,productprice,productcontent,productimage,productsales)
+values (#{productnum},#{productname},#{productkind},#{productprice},#{productcontent},#{productimage},#{productsales})
+</insert>
+
+<select id="read" resultType="ProductDTO">
+select * from product where productnum=#{productnum}
+</select>
+<update id="update"> update product set productnum =#{productnum}, productname =#{productname} ,productkind =#{productkind}
+,productprice =#{productprice},productcontent =#{productcontent},productimage =#{productimage},productsales =#{productsales} where productnum = #{productnum} </update>
+
+<delete id="delete"> delete from product where productnum = #{productnum} </delete>
+
+<select id="listAll" resultType="ProductDTO">
+select * from product</select>
+
+<select id="ProductListAll" resultType="ProductDTO">
+
+<if test="productkind != ''">
+<![CDATA[select * from(SELECT * FROM PRODUCT where productkind like #{productkind} ORDER BY PRODUCTSALES DESC) product where rownum <= 3]]>
+</if>
+<if test="productkind == ''">
+<![CDATA[select * from product]]>
+</if>
+</select>
+
+<select id="MemberList" resultType="MemberDTO">
+<if test="productkind == ''">
+<![CDATA[select * from member]]>
+</if>
+</select>
+
+
+
+
+
+<select id="listSearch" resultType="ProductDTO">
+<![CDATA[select productnum, productname, productkind, productprice, productcontent,productimage, productsales from
+(select /*+INDEX_DESC(product,pk_product)*/ 
+rownum rn, productnum, productname, productkind, productprice,productcontent, productimage, productsales
+from product where rownum <= #{page} * #{perPageNum} ) where rn > (#{page} -1) * #{perPageNum}]]>
+</select>
+
+
+<select id="listSearchCount" resultType="int">
+<![CDATA[select count(productnum) from product]]>
+</select>
+
+
+<select id="listSearchMember" resultType="MemberDTO">
+<![CDATA[select id, pw, membername, year, month, day, gender, email, address, phonenum, authority from
+(select /*+INDEX_DESC(member,pk_member)*/ 
+rownum rn, id, pw, membername, year, month, day, gender, email, address, phonenum, authority 
+from member where rownum <= #{page} * #{perPageNum} ) where rn > (#{page} -1) * #{perPageNum}]]>
+</select>
+
+
+<select id="listSearchCountMember" resultType="int">
+<![CDATA[select count(id) from member]]>
+</select>
+
+<select id="orderAll" resultType="OrderDTO">
+<![CDATA[select ordernum, id, paycheck, payname, orderdate, delivery from
+(select /*+INDEX_DESC(shoporder,pk_shoporder)*/ 
+rownum rn, ordernum, id, paycheck, payname, orderdate, delivery
+from shoporder where rownum <= #{page} * #{perPageNum} ) where rn > (#{page} -1) * #{perPageNum}]]>
+</select>
+
+<select id="orderAllCount" resultType="int">
+<![CDATA[select count(ordernum) from shoporder]]>
+</select>
+
+<update id="orderUpdate">update shoporder set delivery=#{delivery} where ordernum =#{ordernum} </update>
+
+
+
+
+</mapper>

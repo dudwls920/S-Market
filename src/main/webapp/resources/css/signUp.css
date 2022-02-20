@@ -1,0 +1,205 @@
+@charset "UTF-8";
+
+html{
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    height: 100%;
+    background: #f5f6f7;
+    font-family: dotum, '돋움', Helvetica, sans-serif;
+}
+#header{
+    padding-top: 62px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+#wrapper{
+    position: relative;
+    height: 1000px;
+}
+#content{
+    position: absolute;
+    left:50%;
+    transform:translate(-50%);
+    width:420px;
+}
+
+#content2{
+	position: absolute;
+    left:50%;
+    transform:translate(-50%);
+    width:420px;
+}
+#labelId ,#labelEmail{
+	margin-left : 10px;
+
+}
+
+h3{
+    margin:10px 0 8px;
+    font-size:14px;
+    font-weight:700;
+}
+#idCheck{
+	margin-left :5px;
+	margin-top : -22px;
+	width : 80px;
+    float: left;
+    height : 51px;
+    background-color : white;
+    border: solid 1px #dadada;
+    color : #8e8e8e;
+}
+#idCheck:hover {
+	background-color: #27AE60;
+	box-shadow: 0px 15px 20px rgba(201, 138, 255, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+	
+}
+.box1{
+    display: block;
+    width:100%;
+    height:51px;
+    border: solid 1px #dadada;
+    padding: 10px 14px 10px 14px;
+    box-sizing:border-box;
+    background: #fff;
+    position:relative;
+}
+.int{
+    display: block;
+    position:relative;
+    width:100%;
+    height:29px;
+    border:none;
+    background:#fff;
+    font-size: 15px;
+}
+
+input{
+    font-family: dotum, '돋움', Helvetica, sans-serif;
+}
+.box1 .int_id{
+    padding-right: 50px;
+}
+.box1 .int_pass{
+    padding-right: 40px;
+}
+.box1 .int_pass_check{
+    padding-right: 40px;
+}
+.step_url{
+    position: absolute;
+    top: 16px;
+    right: 13px;
+    font-size: 15px;
+    color: #8e8e8e;
+}
+
+
+.pswdImg{
+    width: 18px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+#idDDiv{
+    width : 100%;
+    display: table;   
+}
+
+#idDiv {
+    width : 100%;
+    display: table-cell; 
+}
+
+#idDiv1 {
+    width : 20%;
+    display: table-cell; 
+    height : 100%;
+}
+#bir_wrap{
+    display: table;
+    width: 100%;
+}
+#bir_yy{
+    display: table-cell;
+    width: 147px;
+}
+#bir_mm{
+    display: table-cell;
+    width: 147px;
+    vertical-align: middle;
+}
+#bir_dd{
+    display: table-cell;
+    width: 147px;
+}
+#bir_mm, #bir_dd{
+    padding-left: 10px;
+}
+select{
+    width: 100%;
+    height: 29px;
+    font-size: 15px;
+    background: #fff;
+    background-size: 20px 8px;
+    display: inline-block;
+    text-align: start;
+    border: none;
+    cursor: default;
+    font-family: dotum, '돋움', Helvetica, sans-serif;
+}
+
+.error_next_box{
+    margin-top:9px;
+    font-size:12px;
+    color:red;
+    display: none;
+}
+#alertTxt{
+    position:absolute;
+    top:19px;
+    right: 38px;
+    font-size:12px;
+    color:red;
+    display: none;
+}
+
+.btn_area{
+    margin: 18px 0px 20px 0px;
+}
+
+#signinForm{
+    width: 100%;
+    height : 55px;
+    padding: 21px 0 17px;
+    border: 0;
+    cursor:pointer;
+    color:#fff;
+    background-color:#27AE60;
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: Dotum, '돋움',Helvetica, sans-serif;
+}
+
+#memberRemoveForm{
+    width: 100%;
+    height : 55px;
+    padding: 21px 0 17px;
+    border: 0;
+    cursor:pointer;
+    color:#fff;
+    background-color:#27AE60;
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: Dotum, '돋움',Helvetica, sans-serif;
+}

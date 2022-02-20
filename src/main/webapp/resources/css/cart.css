@@ -1,0 +1,119 @@
+ table{
+	 	border-collapse: collapse;
+	 	width: 100%;
+	 }
+ caption{
+	    visibility: hidden;
+	    width: 0;
+	    height: 0;
+	    font-size: 0;
+	    line-height: 0;
+	    overflow: hidden; 
+	 }
+ th{
+		text-align: center;
+	    color: #333;
+	    border-bottom: 1px solid #e7e7e7;
+	    border-top: 1px solid #3084d9;
+	    background: #27ae60;
+	    padding: 2px 0;	 
+		 }
+.order1{
+	padding:45px 0 0;
+	text-align:center;
+}
+.order1 > button.btn1 {
+	display: inline-block;
+	width:136px;
+	height:42px;
+	font-size:16px;
+	color:#fff;
+	border-radius:2px;
+	line-height:42px;
+	background: #929292;
+}
+
+
+
+
+
+
+.totalprice{
+		    background-color: #27ae60;
+	}
+.totalprice2{
+			width: 80%;
+		    margin: auto;
+		    padding: 10px 0 10px 0;	
+		}
+.finalTotalPrice_span{
+				color: #854A72;
+				font-size: 17px;
+				font-weight: bold;
+			}
+.totalPoint_span{
+				font-size: 17px;
+				font-weight: bold;		
+			}
+
+
+
+.order1{
+	padding:45px 0 0;
+	text-align:center;
+}
+.order1 > button.btn2 {
+	display: inline-block;
+	width:136px;
+	height:42px;
+	font-size:16px;
+	color:#fff;
+	border-radius:2px;
+	line-height:42px;
+	background: #0a56a9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.carttable{
+	 	margin-bottom: 12px;
+	 }
+.carttable2{
+		font-size: 14px;
+	    line-height: 20px;
+	    width: 100%;
+	    text-align: center;
+	 }
+.th_width_1{
+			width: 10%;
+		}	 	 	 
+.th_width_2{
+			width: 15%;
+		}	 	 
+.th_width_3{
+			width: 17.5%;
+		}	 	 
+.td_width_1{
+			width: 10%;
+		}	 	 	 
+.td_width_2{
+			width: 15%;
+		}	 	 
+.td_width_3{
+			width: 17.5%;
+		}	 
+td{
+	text-align: center;
+}	

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.MemberDAO">
+<insert id="insert">
+insert into member(id,pw,membername,year,month,day,gender,email,address,phonenum) 
+values(#{id},#{pw},#{membername},#{year},#{month},#{day},#{gender},#{email},#{address},#{phonenum}) 
+</insert>
+<select id="selectAll" resultType="MemberDTO">
+select * from member
+</select>
+<select id="selectName" resultType="MemberDTO">
+select * from member where membername=#{membername}
+</select>
+
+<select id="checkId" resultType="MemberDTO">
+select * from member where id=#{id}
+</select>
+
+<select id="idChk" resultType="int">
+select count(*) from member where id=#{id}
+</select>
+
+<select id="selectLogin" parameterType="String" resultType="MemberDTO">
+select * from member where id=#{id} and pw=#{pw}
+</select>
+
+<!-- 개인정보 변경 -->
+<update id="update">
+update member set id=#{id}, pw=#{pw}, membername=#{membername}, year=#{year}, month=#{month}, day=#{day}, gender=#{gender}, email=#{email}, address=#{address}, phonenum=#{phonenum} where id=#{id}
+</update>
+
+<delete id="delete">
+delete member where id=#{id}
+</delete>
+
+
+<select id="selectAuthority" resultType="MemberDTO"> select id from member where authority=#{authority} </select>
+</mapper>

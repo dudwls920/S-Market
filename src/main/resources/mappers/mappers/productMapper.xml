@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.dao.ProductDAO">
+
+<insert id="create">insert into product values (productnum =#{productnum}, productname =#{productname} ,productkind =#{productkind}
+,productprice =#{productprice},productcontent =#{productcontent},productimage =#{productimage},productsales =#{productsalse})</insert>
+
+<select id="read" resultType="ProductDTO"> 
+select * from product where productname =#{productname} </select>
+
+<update id="update"> update product set productnum =#{productnum}, productname =#{productname} ,productkind =#{productkind}
+,productprice =#{productprice},productcontent =#{productcontent},productimage =#{productimage},productsales =#{productsalse} where productname = #{productname} </update>
+
+<delete id="delete"> delete from product where productname = #{productname} </delete>
+
+<select id="listAll" resultType="ProductDTO">
+select * from product</select>
+
+<select id="ProductBestSales" resultType="ProductDTO">
+<if test="productkind != ''">
+<![CDATA[select * from(SELECT * FROM PRODUCT where productkind like #{productkind} ORDER BY PRODUCTSALES DESC) product where rownum <= 3]]>
+</if>
+<if test="productkind == ''">
+<![CDATA[select * from(SELECT * FROM PRODUCT ORDER BY PRODUCTSALES DESC) product where rownum <= 20]]>
+</if>
+</select>
+
+<select id="view" resultType="com.shop.dto.ProductDTO"> 
+ select 
+  productnum, productname, productkind, productprice, productcontent, productimage, productsales
+ from 
+  product
+ where
+  productnum = #{productnum} 
+</select>
+
+<select id="listSearch" resultType="ProductDTO">
+<![CDATA[select productnum, productname, productkind, productprice, productcontent,productimage, productsales from
+(select /*+INDEX_DESC(product,pk_product)*/ 
+rownum rn, productnum, productname, productkind, productprice,productcontent, productimage, productsales
+from product where productkind like #{productkind} and rownum <= #{page} * #{perPageNum}  ) where rn > (#{page} -1) * #{perPageNum} order by productnum asc]]>
+</select>
+
+
+<select id="listSearchCount" resultType="int">
+<![CDATA[ select count(productnum) from product where productkind=#{productkind}]]>
+</select>
+
+<!-- 카트 담기 -->
+<insert id="addCart">
+insert into tbl_cart (cartNum, id, productnum, cartStock)
+     values (tbl_cart_seq.nextval, #{id} ,#{productnum},  #{cartStock})
+</insert>
+
+<select id="cartList" resultType="com.shop.dto.CartListDTO">
+ select
+     row_number() over(order by c.cartNum desc) as num,
+     c.cartNum, c.id, c.productnum, c.cartStock,
+     g.productname, g.productprice, g.productkind, g.productimage
+ from tbl_cart c
+     inner join product g
+         on c.productnum = g.productnum   
+     where c.id = #{id}   
+</select>
+
+<!-- 카트 삭제 -->
+<delete id="deleteCart">
+ delete tbl_cart
+     where cartNum = #{cartNum}
+         and id = #{id}
+</delete>
+
+<!-- 카트 담기 -->
+<insert id="addOrder">
+	insert into shoporder (ordernum, id , payname , orderdate )
+     values (#{ordernum},#{id}, #{payname} ,sysdate)
+</insert>
+<insert id="addOrdert">
+	insert into ORDERDETAIL (ordernum, productnum, ordercount, orderprice)
+     values (#{ordernum}, #{productnum} ,#{ordercount},  #{orderprice})
+</insert>
+
+<!-- 검색 -->
+
+<select id="ProductSearch" resultType="com.shop.dto.ProductDTO">
+<![CDATA[select distinct productnum, productname, productkind, productprice, productcontent,productimage, productsales from
+(select /*+INDEX_DESC(product,pk_product)*/ 
+rownum rn, productnum, productname, productkind, productprice,productcontent, productimage, productsales
+from product where productname like '%'||#{keyword}||'%' or productcontent like '%'||#{keyword}||'%'
+ and rownum <= #{page} * #{perPageNum}  ) 
+ where rn > (#{page} -1) * #{perPageNum} order by productnum asc]]>
+</select>
+
+<select id="ProductSearchCount" resultType="int">
+<![CDATA[ select count(productnum) from product where productname like '%'|| #{keyword}||'%' or productcontent like '%'|| #{keyword}||'%']]>
+</select>
+</mapper>

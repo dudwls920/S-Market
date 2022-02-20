@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.UserGesipanDAO">
+<insert id="create">
+insert into usergesipan(bno,id,title,content,regdate)
+values (userge.nextval,#{id},#{title},#{content},sysdate)
+</insert>
+
+
+<insert id="createRe">
+insert into eventreply(bno,rno,content,id)
+values (#{bno},EVENTREPLYSEQ.NEXTVAL,#{content},#{id})
+</insert>
+
+<select id="readReply" resultType="com.shop.dto.ReplyDTO">
+select bno,rno, content, id, regdate from eventreply where bno = #{bno}
+</select>
+
+<delete id="replyRemove">
+delete from eventreply where rno=#{rno} and bno=#{bno}
+</delete>
+
+<update id="replyModify">
+update eventreply set content = #{content} where rno=#{rno} and bno=#{bno}
+</update>
+
+<update id="viewcount">
+update usergesipan set viewcnt = viewcnt+1 where bno=#{bno}
+</update>
+
+
+<select id="read" resultType="UserGesipanDTO">
+select * from usergesipan where bno=#{bno}
+</select>
+<select id="myread" resultType="UserGesipanDTO">
+select * from usergesipan where id=#{id}
+</select>
+
+<update id="update">
+update usergesipan set title=#{title},content=#{content} where bno=#{bno}
+</update>
+
+<delete id="delete">
+delete from usergesipan where bno=#{bno}
+</delete>
+
+<sql id='search'>
+	<if test="searchType!=null">
+		<if test="searchType == 't'.toString()"> and title like '%'|| #{keyword}||'%' </if>
+		<if test="searchType == 'c'.toString()"> and content like '%'|| #{keyword}||'%' </if>
+		<if test="searchType == 'i'.toString()"> and id like '%'|| #{keyword}||'%' </if>
+		<if test="searchType == 'tc'.toString()"> and ( title like '%'|| #{keyword}||'%' OR content like '%'|| #{keyword}||'%') </if>
+		<if test="searchType == 'ci'.toString()"> and ( content like '%'|| #{keyword}||'%' OR id like '%'|| #{keyword}||'%') </if>
+		<if test="searchType == 'tci'.toString()"> and ( title like '%'|| #{keyword}||'%' OR content like '%'|| #{keyword}||'%' OR id like '%'|| #{keyword}||'%') </if>
+	</if>
+</sql>
+
+<select id="UserGesipanlistSearch" resultType="com.shop.dto.UserGesipanDTO">
+<![CDATA[select bno,title,content,id,regdate,viewcnt from
+(select rownum rn,bno,title,content,id,regdate,viewcnt from usergesipan where 1=1 ]]> 
+<include refid="search"/>
+<![CDATA[ and rownum <= #{page} * #{perPageNum} and bno > 0 ORDER BY bno DESC) where rn > (#{page} -1) * #{perPageNum}]]>
+</select>
+<!-- <select id="listSearch" resultType="com.human.dto.BoardDTO">
+<![CDATA[select bno, title, content, writer, viewcnt, regdate from
+(select /*+INDEX_DESC(tbl_board,pk_board)*/ 
+rownum rn,bno,title,content,writer,viewcnt,regdate
+from tbl_board where 1=1 ]]>
+<include refid="search"/>
+<![CDATA[ and rownum <= #{page} * #{perPageNum} and bno > 0 ) 
+where rn > (#{page} -1) * #{perPageNum}]]>
+</select> -->
+
+
+
+
+
+
+<select id="UserGesipanlistSearchCount" resultType="int">
+<![CDATA[ select count(bno) from usergesipan where 1=1 ]]>
+<include refid="search"/>
+<![CDATA[ and bno > 0 ]]>
+</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+
+h1{
+
+	text-decoration:underline;
+	text-align:center;
+}
+
+hr{
+	margin:50px 200px 50px 200px;
+	border:2px solid;	
+}
+
+#star {
+	color : red;
+}
+
+#td1{
+	background:white;
+	text-align:right;
+	border-bottom:10px solid white;
+	vertical-align:middle;
+}
+
+#userId, #userPw, #userPwCheck, #userName, #userEmail {
+	width : 220px;
+	height : 30px;
+	margin-left : 10px;
+	margin-right : 10px;
+}
+
+#userGender, #mailreception {
+	margin-left : 10px;
+	margin-right : 10px;
+}
+
+#labelId {
+	margin-left : 10px;
+}
+
+#join_table {
+	margin-top : 50px;
+	margin-left: 250px;
+	margin-bottom : 20px;
+	font-family: 'Noto Sans KR', sans-serif;
+
+}
+
+table td{
+	border-bottom:20px solid white;
+	
+}
+
+
+table tr{
+	padding-bottom:100px;
+}
+
+#btn_wrapper{
+	width:100%;
+}
+
+#btn_submit, #btn_reset, #idCheck{
+	width: 140px;
+	height: 45px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+	color: #000;
+	background-color: #fff;
+	border: none;
+	border-radius: 45px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+}
+
+#btn_submit:hover{
+	background-color: #2EE59D;
+	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+}
+
+#btn_reset:hover {
+	background-color: #B8B8B8;
+	box-shadow: 0px 15px 20px rgba(70, 70, 70, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+}
+
+#idCheck:hover {
+	background-color: #C98AFF;
+	box-shadow: 0px 15px 20px rgba(201, 138, 255, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+}
+
+#btn_reset {
+	display: inline-block;
+	float :left;
+}
+
+#btn_submit {
+	display: inline-block;
+	float :right;
+}
+
+#submit_wrapper {
+	margin : 0 auto;
+	width : 1100px;
+	height : 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

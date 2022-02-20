@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.OrderDAO">
+
+
+
+<select id="orderList" resultType="OrderDTO">
+select S.ordernum, S.orderdate, P.productimage, P.productname,
+ (select SUM(orderprice) from orderdetail where id=#{id} and ordernum=s.ordernum group by ordernum) orderprice , 
+ O.ordercount, S.paycheck , S.delivery, P.productnum, P.productkind
+from orderdetail O,shoporder S, product p 
+where s.ordernum = o.ordernum
+and o.productnum = p.productnum
+and s.id = #{id}
+order by s.ordernum
+</select>
+
+<select id="mypostList" resultType="com.shop.dto.UserGesipanDTO">
+<![CDATA[select bno,title,content,id,regdate,viewcnt from
+(select rownum rn,bno,title,content,id,regdate,viewcnt from usergesipan where id = #{id}
+and rownum <= #{pm.page} * #{pm.perPageNum} and bno > 0 ORDER BY bno DESC) where rn > (#{pm.page} -1) * #{pm.perPageNum}]]>
+</select>
+
+<select id="mypostCount" resultType="int">
+<![CDATA[ select count(bno) from usergesipan where id = #{id}
+ and bno > 0
+ ]]>
+</select>
+
+<select id="cashOrderList" resultType="OrderDTO">
+select S.ordernum, S.orderdate, P.productimage, P.productname, O.orderprice, P.productcontent, S.id, S.payname,
+ (select SUM(orderprice) from orderdetail where o.ordernum = #{ordernum} and ordernum=s.ordernum group by ordernum) amount_orderprice , 
+ O.ordercount, S.paycheck , S.delivery, P.productnum, P.productkind
+from orderdetail O,shoporder S, product p 
+where s.ordernum = o.ordernum
+and o.productnum = p.productnum
+and o.ordernum = #{ordernum}
+order by s.ordernum
+</select>
+
+<delete id="remove">
+BEGIN
+	delete from orderdetail where ordernum = #{ordernum};
+	delete from shoporder where ordernum = #{ordernum};
+END;
+</delete>
+
+<update id="update">
+	update shoporder set paycheck='O' where ordernum = #{ordernum}
+</update>
+
+</mapper>
